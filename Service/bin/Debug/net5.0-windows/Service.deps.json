@@ -1,0 +1,53 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "Service/1.0.0": {
+        "dependencies": {
+          "System.Windows.Controls.DataVisualization.Toolkit": "3.5.0.0",
+          "WPFToolkit": "3.5.40128.1"
+        },
+        "runtime": {
+          "Service.dll": {}
+        }
+      },
+      "System.Windows.Controls.DataVisualization.Toolkit/3.5.0.0": {
+        "runtime": {
+          "System.Windows.Controls.DataVisualization.Toolkit.dll": {
+            "assemblyVersion": "3.5.0.0",
+            "fileVersion": "3.5.0.0"
+          }
+        }
+      },
+      "WPFToolkit/3.5.40128.1": {
+        "runtime": {
+          "WPFToolkit.dll": {
+            "assemblyVersion": "3.5.40128.1",
+            "fileVersion": "3.5.50211.1"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Service/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Windows.Controls.DataVisualization.Toolkit/3.5.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WPFToolkit/3.5.40128.1": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

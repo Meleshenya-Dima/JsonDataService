@@ -1,0 +1,54 @@
+﻿<Window x:Class="Service.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:applicationviewmodel="clr-namespace:Service.ApplicationViewModel"
+        d:DataContext="{d:DesignInstance Type=applicationviewmodel:ViewModel}"
+        xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="448" Width="800">
+    <Grid Margin="0,-6,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.8*" />
+        </Grid.ColumnDefinitions>
+        <ListBox Grid.Column="0" ItemsSource ="{Binding Users}"
+                 SelectedItem="{Binding SelectedUser}" Margin="0,10,169,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="18" Text="{Binding Path = User}">
+                        </TextBlock>
+                        <TextBlock Text="Средний результат по дням:"/>
+                        <TextBlock Text= "{Binding Path=AverageResult}"/>
+                        <TextBlock Text="Лучший результат:"/>
+                        <TextBlock  Text="{Binding Path= BestResult}"/>
+                        <TextBlock Text="Худший результат:"/>
+                        <TextBlock Text="{Binding Path=WorstResult}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Difference}" Value = "true">
+                            <Setter Property="Foreground" Value="Blue"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <charting:Chart Name="Charts" Margin="280,13,-18,0" Grid.ColumnSpan="2" BorderBrush="White">
+            <charting:LineSeries Name="Point" Title="Point (WithValue)" DependentValuePath="Value" IndependentValuePath="Day" ItemsSource="{Binding SelectedUserDay}" HorizontalAlignment="Left" Width="340"/>
+            <charting:Chart.Axes>
+                <!--<charting:LinearAxis Orientation="Y" Minimum="0" Maximum="{Binding Path=SelectedUser.BestResult}"/>-->
+                <charting:LinearAxis Orientation="Y" Minimum="0" Maximum="120000" />
+                <charting:LinearAxis Orientation="X" Minimum="0" Maximum="30" ShowGridLines="True"/>
+            </charting:Chart.Axes>
+        </charting:Chart>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="280,13,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.264,-0.549" Width="67" Command="{Binding SaveCommand}" CommandParameter="{Binding SelectedUser}"/>
+        <Button Content="Смотреть график" Grid.Column="1" HorizontalAlignment="Left" Margin="231,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.241,0.002" Command="{Binding GraficValue}" CommandParameter="{Binding SelectedUser}"/>
+        <Label Content="График для пользователя: " HorizontalAlignment="Left" Margin="381,35,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="154"/>
+    </Grid>
+</Window>
